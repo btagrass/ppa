@@ -1,0 +1,38 @@
+# Menu
+m:
+  App: Application (A)
+  Calendar: Calendar (C)
+  Folder: Folder (F)
+  Metadata: Metadata (M)
+  Title: PhotoPrism Assistant
+# Label
+l:
+  Check: Check
+  Clean: Clean
+  CleaningCompleted: CleaningCompleted
+  Date: Date
+  DateTime: DateTime
+  Error: Error
+  ErrorValue: ErrorValue
+  Folder: Folder
+  Images: Images
+  Info: Information
+  Lang: Language
+  LangTip: Save and restart to take effect
+  LatencyTime: LatencyTime
+  Lives: Lives
+  Password: Password
+  Photos: Photos
+  Resolution: Resolution
+  Save: Save
+  SaveSuccessful: "SaveSuccessful: %d"
+  Similars: Similars
+  Url: Url
+  UserName: UserName
+# Rule
+r:
+  Input: Please input %s
+  InputCorrect: Please input correct %s
+  Select: Please select %s
+# Error
+e:

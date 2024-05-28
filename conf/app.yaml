@@ -1,0 +1,4 @@
+app:
+  dir: /data/medias
+data:
+  dsn: sqlite://data/ppa.db

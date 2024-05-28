@@ -1,0 +1,38 @@
+# Menu
+m:
+  App: 应用 (A)
+  Calendar: 日历 (C)
+  Folder: 目录 (F)
+  Metadata: 元数据 (M)
+  Title: PhotoPrism 助手
+# Label
+l:
+  Check: 检查
+  Clean: 清理
+  CleaningCompleted: 清理结束
+  Date: 日期
+  DateTime: 日期时间
+  Error: 错误
+  ErrorValue: 误差值
+  Folder: 目录
+  Images: 图像数
+  Info: 信息
+  Lang: 语言
+  LangTip: 保存后重启生效
+  LatencyTime: 停留时间
+  Lives: 实况数
+  Password: 密码
+  Photos: 照片数
+  Resolution: 分辨率
+  Save: 保存
+  SaveSuccessful: "保存成功: %d"
+  Similars: 相似数
+  Url: Url
+  UserName: 用户名
+# Rule
+r:
+  Input: 请输入 %s
+  InputCorrect: 请输入正确的 %s
+  Select: 请选择 %s
+# Error
+e:
