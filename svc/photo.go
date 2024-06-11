@@ -116,8 +116,16 @@ func (s *PhotoSvc) CheckFolderPhotos(date string) ([]mdl.FolderPhoto, error) {
 	}
 	var folderPhotos []mdl.FolderPhoto
 	for k, v := range photos {
-		uv := lo.Filter(v, func(item mdl.Photo, index int) bool {
-			return item.Year == -1 && item.Month == -1 && !utl.HasSuffix(item.FileName, ".mov.jpg", ".mp4.jpg")
+		uv := lo.Filter(v, func(item mdl.Photo, _ int) bool {
+			if item.Year == -1 && item.Month == -1 && !utl.HasSuffix(item.FileName, ".mov.jpg", ".mp4.jpg") {
+				return true
+			}
+			if strings.Contains(item.FileName, "20240131_063835_066D9633.jpg") {
+				println(item.Files)
+			}
+			return lo.ContainsBy(item.Files, func(i mdl.PhotoFile) bool {
+				return i.FileType == "aae"
+			})
 		})
 		if len(uv) > 0 {
 			folderPhotos = append(folderPhotos, mdl.FolderPhoto{
@@ -238,6 +246,15 @@ func (s *PhotoSvc) ListCalendarPhotos(date string) (map[string][]mdl.Photo, erro
 			logrus.Error(err)
 			continue
 		}
+		for _, p := range photos {
+			_, err = htp.Get(fmt.Sprintf("%s/api/v1/photos/%s", app.Url, p.UID), map[string]string{
+				"X-Auth-Token": app.Token,
+			}, &p)
+			if err != nil {
+				logrus.Error(err)
+				continue
+			}
+		}
 		dateTime, err := time.Parse("January-2006", strings.ToTitle(a.Slug))
 		if err != nil {
 			return nil, err
@@ -253,7 +270,7 @@ func (s *PhotoSvc) ListFolderPhotos(date string) (map[string][]mdl.Photo, error)
 		return nil, err
 	}
 	var albums []mdl.Album
-	_, err = htp.Get(fmt.Sprintf("%s/api/v1/albums?count=%d&offset=0&q=&category=&order=oldest&year=&type=folder", app.Url, s.count), map[string]string{
+	_, err = htp.Get(fmt.Sprintf("%s/api/v1/albums?count=%d&offset=0&q=&category=&order=name&year=&type=folder", app.Url, s.count), map[string]string{
 		"X-Auth-Token": app.Token,
 	}, &albums)
 	if err != nil {
@@ -264,7 +281,7 @@ func (s *PhotoSvc) ListFolderPhotos(date string) (map[string][]mdl.Photo, error)
 		if err != nil {
 			return nil, err
 		}
-		albums = lo.Filter(albums, func(item mdl.Album, index int) bool {
+		albums = lo.Filter(albums, func(item mdl.Album, _ int) bool {
 			return item.Slug == dateTime.Format("2006-01")
 		})
 	}

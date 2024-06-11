@@ -31,7 +31,7 @@ func NewFolderGui(win fyne.Window) fyne.CanvasObject {
 		Text: i18n.T("l.Date"),
 	}
 	dateEntry := &widget.Entry{
-		Text:   time.Now().Format("2006-1"),
+		Text:   time.Now().Format("2006-01"),
 		Scroll: container.ScrollNone,
 	}
 	clearButton := &widget.Button{
